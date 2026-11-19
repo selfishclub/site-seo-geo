@@ -13,10 +13,23 @@
 SEO를 처음 듣는 분도 따라올 수 있게, 단계마다 **「왜 하는지」 한 줄을 먼저 말해 줍니다.**
 
 ## 설치
+Claude Code를 열고 아래 문장을 그대로 붙여 넣으세요. 설치는 Claude가 해 줍니다.
+
+```
+https://github.com/selfishclub/site-seo-geo 스킬 설치해 줘.
+~/.claude/skills/site-seo-geo 에 받아 주고, 다 되면 어떻게 쓰는지 알려 줘.
+```
+
+- 이 저장소는 비공개예요. **초대를 받은 GitHub 계정**으로 로그인돼 있어야 받을 수 있어요. 안 받아지면 Claude가 GitHub 로그인부터 안내해요.
+- 설치가 끝나면 Claude Code를 한 번 다시 열어 주세요.
+
+직접 설치하려면 터미널에서 이렇게 하면 돼요.
 ```bash
 git clone https://github.com/selfishclub/site-seo-geo ~/.claude/skills/site-seo-geo
 ```
-Claude Code를 다시 열고, **내 사이트 코드 폴더**에서 이렇게 말하면 됩니다.
+
+## 쓰는 법
+**내 사이트 코드 폴더**를 연 채로 이렇게 말하면 됩니다.
 
 - 「내 사이트 점검해 줘」
 - 「글 구조 봐 줘」
