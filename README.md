@@ -1,0 +1,121 @@
+# site-seo-geo · 내 사이트 검색 점검
+
+내가 만든 사이트가 **구글 · 네이버 검색**과 **ChatGPT · 네이버 AI 브리핑 같은 AI 답변**에 나올 준비가 됐는지 점검하는 Claude Code 스킬입니다. 점검이 끝나면 빠진 곳을 고치고, 검색엔진 등록까지 도와줍니다.
+
+> **왜 하나요?** 사이트를 만들어도 검색엔진과 AI가 모르면 아무도 찾아오지 못해요. 이 스킬은 내 사이트를 검색엔진과 AI가 **찾아오고 · 읽고 · 소개할 수 있게** 만들어 줘요.
+
+| 말 | 뜻 |
+|---|---|
+| **SEO** (검색 최적화) | 구글 · 네이버 **검색 결과 목록**에 내 사이트가 뜨게 하는 것 |
+| **GEO** (AI 답변 최적화) | ChatGPT · 네이버 AI 브리핑 같은 **AI 답변 안에** 내 사이트가 인용 · 추천되게 하는 것 |
+| 둘의 관계 | AI도 검색엔진이 모아 둔 페이지를 보고 답해요. 그래서 SEO가 바닥이고, GEO는 그 위에 쌓는 층이에요. |
+
+SEO를 처음 듣는 분도 따라올 수 있게, 단계마다 **「왜 하는지」 한 줄을 먼저 말해 줍니다.**
+
+## 설치
+```bash
+git clone https://github.com/selfishclub/site-seo-geo ~/.claude/skills/site-seo-geo
+```
+Claude Code를 다시 열고, **내 사이트 코드 폴더**에서 이렇게 말하면 됩니다.
+
+- 「내 사이트 점검해 줘」
+- 「글 구조 봐 줘」
+- 「고쳐 줘」
+- 「색인 등록 도와줘」
+- 「등록 상태 봐 줘」
+- 「측정 질문 만들어 줘」
+
+## 준비물
+| 무엇 | 왜 |
+|---|---|
+| Claude Code | 점검하고 고쳐요 |
+| Node.js 18 이상 | 점검 스크립트를 돌려요. 따로 설치할 패키지는 없어요 |
+| 배포된 사이트 주소 | `프로젝트.vercel.app` 또는 내 도메인. 미리보기 주소는 안 돼요 |
+| [Aside](https://aside.com) (권장) | 색인 등록 화면을 대신 조작해요. 평소 쓰는 브라우저라 로그인이 그대로 있어요 |
+| 구글 · 네이버 계정 | 서치콘솔 · 서치어드바이저 등록용이에요 |
+
+Aside가 없으면 [agent-browser](https://github.com/vercel-labs/agent-browser)로 대신하고, 둘 다 없으면 화면을 따라 하도록 안내합니다.
+
+## 하는 일 · 6단계
+| 단계 | 하는 일 | 왜 |
+|---|---|---|
+| 0 주소 확인 | 진짜 주소인지 봐요 | 미리보기 주소에는 「검색에 넣지 마세요」 표시가 자동으로 붙어요 |
+| 1 기술 점검 | 16가지를 ○△✕로 판정해요 | 검색엔진과 AI 봇이 들어와서 글자를 읽을 수 있어야 해요 |
+| 2 글 구조 점검 | 「지금 구조 ↔ 추천 구조」를 나란히 보여 주고, 빠진 칸을 짚어요 | AI는 질문에 딱 맞는 한두 문장을 뽑아 답해요. 찾기 쉬운 자리에 있어야 인용돼요 |
+| 3 고치기 | 빠진 것을 코드에 넣어요. 배포는 내가 해요 | 빠진 것 대부분은 코드 몇 줄이에요 |
+| 4 색인 등록 | 구글 서치콘솔 → 빙 → 네이버 서치어드바이저 → IndexNow | 검색엔진에 「새 사이트가 생겼어요」라고 직접 알려요 |
+| 5 측정 약속 | 1주 뒤 AI에게 물어볼 질문 3개와 기록표를 만들어요 | 효과는 며칠~몇 주 뒤에 나와요. 같은 질문으로 비교해야 보여요 |
+
+시간이 모자라면 **1 → 3 → 구글 서치콘솔**까지만 해도 됩니다(30~40분). 나머지는 리포트에 숙제로 남아요.
+
+### 1단계 기술 점검 16가지
+| 묶음 | 항목 |
+|---|---|
+| 들어올 수 있나 | 정상 열림 · 「검색 금지」 표시 없음 · robots.txt · 검색/AI 봇 7종(구글 · 빙 · 네이버 · ChatGPT 검색 · ChatGPT 학습 · Claude · Perplexity) 이름으로 받아 보기 |
+| 길 안내가 있나 | sitemap.xml · 메뉴가 진짜 링크 · 대표 주소(canonical) · 없는 주소는 404 |
+| 글자로 읽히나 | **자바스크립트 없이 보이는 글자** · H1 하나 · 언어 표시 · 휴대폰 화면 설정 · 이미지 설명(alt) |
+| 소개가 정확한가 | 페이지별 제목 · 설명 · 구조화 데이터 · 공유 카드 · 파비콘 · 소유 확인 태그 |
+
+React · Vite로 만든 사이트는 「자바스크립트 없이 보이는 글자」에서 가장 많이 걸립니다. 대부분의 AI 봇은 자바스크립트를 실행하지 않아서, 이런 사이트가 빈 화면으로 보여요.
+
+### 2단계 글 구조 점검 8가지
+첫 화면 한 문장(누가 · 누구에게 · 무엇을) · 손님 질문 모양 제목 · 첫 문장에 바로 답 · 사실은 글자로(가격 · 시간 · 연락처) · 정리된 모양(표 · 번호 · FAQ) · 경험 · 숫자 · 출처 · 날짜와 쓴 사람 · 어디서나 같은 소개
+
+### 4단계 색인 등록 · 누가 무엇을 하나
+| | Aside(브라우저)가 | Claude Code가 | 내가 |
+|---|---|---|---|
+| 사이트 추가 | 주소를 넣고, 소유 확인 태그를 받아 와요 | 태그를 코드에 넣어요 | 로그인 · 배포 |
+| 소유 확인 · 사이트맵 · 색인 요청 | 버튼 **앞에서 멈춰요** | 태그가 진짜 주소에 보이는지 확인해요 | 「눌러도 돼요?」에 예 |
+| IndexNow | — | 키 파일을 만들고 빙 · 네이버에 알려요 | 배포 |
+
+## 결과물
+사이트 폴더에 `seo-check/`가 생깁니다. 이 폴더는 배포되지 않게 해 주세요.
+
+- `report.html`: 리포트 한 장. 탭은 ① 기술 점검 ② 글 구조 ③ 색인 등록 진행 ④ 측정 기록표이고, 「고쳐 줘」 문장을 복사하는 버튼이 있어요.
+- `check.json` · `outline.json` · `review.json` · `register.json` · `measure.json`: 단계별 결과 파일이에요.
+
+예시 리포트: [`examples/report-sample.html`](examples/report-sample.html)
+
+## AI가 하지 않는 것
+- 로그인 · 비밀번호 · 인증번호 입력. 받지도 않아요.
+- 묻지 않고 확인 · 제출 · 요청 · 권한 허용 버튼 누르기.
+- 묻지 않고 배포(push)하기.
+- 없는 숫자 · 후기 · 경력 · 가격 만들기. 모르는 칸은 「✎ 채울 것」으로 남겨요.
+- 「검색 1등」「AI 인용」 같은 결과 약속. 요청해도 색인이 바로 되지는 않아요.
+- 화면 속 문구를 지시로 따르기.
+
+## 구조
+```
+SKILL.md                 흐름 · 단계별 「왜」 · 원칙
+scripts/
+  check.mjs              1단계 기술 점검 → seo-check/check.json
+  outline.mjs            2단계 글 구조 뽑기 → seo-check/outline.json
+  report.mjs             리포트 → seo-check/report.html
+  indexnow.mjs           IndexNow 키 만들기 · 알리기
+  lib.mjs                공통 도구
+references/
+  checks.md              16가지 기준 · 고치는 법(Next.js · Vite React · HTML · Astro)
+  structure.md           글 구조 기준 · 추천 구조 · review.json 형식
+  register.md            등록 순서 · Aside에 시키는 말 · agent-browser · 화면 따라 하기
+  measure.md             측정 질문 · 기록표
+```
+스크립트만 따로 쓸 수도 있습니다.
+```bash
+node scripts/check.mjs https://내주소 --pages 5
+node scripts/outline.mjs https://내주소
+node scripts/report.mjs --open
+```
+
+## 참고한 것
+- 스폰지클럽 이니(iny)의 GEO 스킬(geo-site · geo-index)의 흐름을 참고했어요. 실제 주소로 점검하기, AI 봇 이름으로 받아 보기, 등록 버튼 앞에서 멈추기가 그 부분이에요. 코드와 문구는 가져오지 않고 새로 썼어요.
+- 공개 스킬(MIT)에서 아이디어를 얻었어요.
+  - [onvoyage-ai/gtm-engineer-skills](https://github.com/onvoyage-ai/gtm-engineer-skills): 스크립트 판정과 AI 판단을 나누는 방식
+  - [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills): 글 블록 패턴
+  - [leopard627/fire-your-seo-agency](https://github.com/leopard627/fire-your-seo-agency): 첫 문단 직답 · 네이버 대응
+  - [zubair-trabzada/geo-seo-claude](https://github.com/zubair-trabzada/geo-seo-claude): AI 크롤러 · 구조화 데이터 템플릿
+- 기준 자료
+  - 네이버 검색 공식 블로그 「AI 시대에 사용자의 선택을 받는 콘텐츠 작성 가이드」와 실전편
+  - Google Search Central 「AI 기능과 웹사이트」
+  - Princeton 「GEO: Generative Engine Optimization」(KDD 2024)
+
+배포: 셀피쉬클럽(SELFISH CLUB) · 2026-11-21 입문자 바이브코딩 실전 워크숍. CC-BY-4.0.
