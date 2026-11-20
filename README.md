@@ -20,7 +20,6 @@ https://github.com/selfishclub/site-seo-geo 스킬 설치해 줘.
 ~/.claude/skills/site-seo-geo 에 받아 주고, 다 되면 어떻게 쓰는지 알려 줘.
 ```
 
-- 이 저장소는 비공개예요. **초대를 받은 GitHub 계정**으로 로그인돼 있어야 받을 수 있어요. 안 받아지면 Claude가 GitHub 로그인부터 안내해요.
 - 설치가 끝나면 Claude Code를 한 번 다시 열어 주세요.
 
 직접 설치하려면 터미널에서 이렇게 하면 돼요.
