@@ -119,16 +119,4 @@ node scripts/outline.mjs https://내주소
 node scripts/report.mjs --open
 ```
 
-## 참고한 것
-- 스폰지클럽 이니(iny)의 GEO 스킬(geo-site · geo-index)의 흐름을 참고했어요. 실제 주소로 점검하기, AI 봇 이름으로 받아 보기, 등록 버튼 앞에서 멈추기가 그 부분이에요. 코드와 문구는 가져오지 않고 새로 썼어요.
-- 공개 스킬(MIT)에서 아이디어를 얻었어요.
-  - [onvoyage-ai/gtm-engineer-skills](https://github.com/onvoyage-ai/gtm-engineer-skills): 스크립트 판정과 AI 판단을 나누는 방식
-  - [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills): 글 블록 패턴
-  - [leopard627/fire-your-seo-agency](https://github.com/leopard627/fire-your-seo-agency): 첫 문단 직답 · 네이버 대응
-  - [zubair-trabzada/geo-seo-claude](https://github.com/zubair-trabzada/geo-seo-claude): AI 크롤러 · 구조화 데이터 템플릿
-- 기준 자료
-  - 네이버 검색 공식 블로그 「AI 시대에 사용자의 선택을 받는 콘텐츠 작성 가이드」와 실전편
-  - Google Search Central 「AI 기능과 웹사이트」
-  - Princeton 「GEO: Generative Engine Optimization」(KDD 2024)
-
 배포: 셀피쉬클럽(SELFISH CLUB) · 2026-11-21 입문자 바이브코딩 실전 워크숍. CC-BY-4.0.
